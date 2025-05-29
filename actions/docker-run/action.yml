@@ -1,0 +1,24 @@
+name: 'Docker Run Action'
+description: 'Run a command in a new container'
+inputs:
+  image:
+    description: 'Image'
+    required: true
+  options:
+    description: 'Options'
+    required: false
+    default: "-v ${{ github.workspace }}:/work"
+  run:
+    description: 'Run command in container'
+    required: false
+  shell:
+    description: 'Use a specific shell'
+    required: false
+    default: sh
+  docker_network:
+    description: 'Docker Network ID'
+    default: ${{ job.container.network }}
+    required: false
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

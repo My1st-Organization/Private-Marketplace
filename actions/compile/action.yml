@@ -1,0 +1,21 @@
+name: 'Compile C file'
+description: 'Compiles a given C source file using gcc'
+inputs:
+  c_file:
+    description: 'Path to the C file to compile'
+    required: true
+runs:
+  using: 'composite'
+  steps:
+    - name: Compile C code
+      shell: bash
+      run: |
+        echo "Compiling: ${{ inputs.c_file }}"
+        gcc "${{ inputs.c_File }}" -o output_binary
+        if [ $? -eq 0 ]; then
+          echo "Compilation successful!"
+        else
+          echo "Compilation failed!"
+          exit 1
+        fi
+        echo "Binary created: output_binary"
